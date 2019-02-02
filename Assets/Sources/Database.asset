@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f0ee777b889354bbc2fdb5538f1f10, type: 3}
+  m_Name: Database
+  m_EditorClassIdentifier: 
+  datas:
+  - name: "\u7D04 \u7FF0 \u55AC"
+    color: {r: 0.91764706, g: 0.6392157, b: 0.28627452, a: 1}
+    Icon: {fileID: 21300000, guid: 361fe42109446c84abf324b8094d50e3, type: 3}
+  - name: "\u6C99\u9686\u5DF4\u65AF"
+    color: {r: 1, g: 1, b: 1, a: 1}
+    Icon: {fileID: 21300000, guid: b56fa57486a3d7a4cbf343fe4025ba02, type: 3}
+  - name: "\u5FCD \u592A \u90CE"
+    color: {r: 0.63529414, g: 0.33333334, b: 0.9647059, a: 0}
+    Icon: {fileID: 21300000, guid: 379878a3e4e33a5409c0550fe10235f2, type: 3}
+  - name: "\u9322 \u592B \u4EBA"
+    color: {r: 0.9607843, g: 0.44313726, b: 0.70980394, a: 0}
+    Icon: {fileID: 21300000, guid: d24908b6369626b41b9848e7f64e4668, type: 3}
+  - name: "\u963F \u571F \u4F2F"
+    color: {r: 0.96862745, g: 0.85882354, b: 0.5803922, a: 0}
+    Icon: {fileID: 21300000, guid: e88d9db325a1d9d4c9cc559e2d855a6d, type: 3}
+  - name: "\u838E\u62C9\u516C\u4E3B"
+    color: {r: 1, g: 0.7019608, b: 0.73333335, a: 1}
+    Icon: {fileID: 21300000, guid: 4d5359bb41e0825469664779e47cd062, type: 3}
+  - name: "\u5BAE\u672C\u5BF6\u85CF"
+    color: {r: 0.7137255, g: 1, b: 0.72156864, a: 0}
+    Icon: {fileID: 21300000, guid: 092d1645075511141b60ec5fdc77c9a5, type: 3}
+  - name: "\u7CD6\u3000\u7CD6"
+    color: {r: 1, g: 0.9607843, b: 0.6392157, a: 0}
+    Icon: {fileID: 21300000, guid: 9c141e116df62ba4a9172620673f7e1a, type: 3}
+  - name: "\u70CF\u3000\u54AA"
+    color: {r: 1, g: 0.654902, b: 0.3372549, a: 0}
+    Icon: {fileID: 21300000, guid: 5b6a1a4d8bd8a7346a2809bcba1bb6cb, type: 3}
+  - name: "\u5B6B \u5C0F \u7F8E"
+    color: {r: 1, g: 0.3529412, b: 0.30980393, a: 0}
+    Icon: {fileID: 21300000, guid: 50105c0c3347f1043a3a853c71972bce, type: 3}
+  - name: "\u5C0F \u4E39 \u5C3C"
+    color: {r: 0.39215687, g: 0.6313726, b: 1, a: 0}
+    Icon: {fileID: 21300000, guid: 4f22895cd3e80b24c89c69d1d03b4950, type: 3}
+  - name: "\u91D1 \u8C9D \u8C9D"
+    color: {r: 0.7411765, g: 1, b: 0.94509804, a: 0}
+    Icon: {fileID: 21300000, guid: 52be848fc83bb894c865bfbc7fbf1c59, type: 3}

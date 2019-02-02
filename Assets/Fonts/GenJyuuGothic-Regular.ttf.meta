@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 8366ce02635830f419f890330bddf346
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gen Jyuu Gothic
+  fontNames:
+  - Gen Jyuu Gothic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3d0eb8b0705a6bd4599b370393a15b0f, type: 3}
+  - {fileID: 12800000, guid: 4e7268527c19d504b875d236a9dd3641, type: 3}
+  - {fileID: 12800000, guid: 4191df3505b121e47a6ea340f717129c, type: 3}
+  - {fileID: 12800000, guid: 5949e39af9d201846b201fee1427c434, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
