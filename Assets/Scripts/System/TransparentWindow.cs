@@ -6,6 +6,8 @@ public class TransparentWindow : MonoBehaviour
 {
     [SerializeField] private Material m_Material;
 
+    public Vector2Int Size = new Vector2Int(400, 680);
+
     private struct MARGINS
     {
         public int cxLeftWidth;
@@ -55,7 +57,7 @@ public class TransparentWindow : MonoBehaviour
         // Transparent windows with click through
         SetWindowLong(hwnd, -20, 32 | 0x00020000);//GWL_EXSTYLE=-20; WS_EX_LAYERED=524288=&h80000, WS_EX_TRANSPARENT=32=0x00000020L
         SetLayeredWindowAttributes(hwnd, 0, 255, 2);// Transparency=51=20%, LWA_ALPHA=2
-        SetWindowPos(hwnd, HWND_TOP, 0, 0, fWidth, fHeight, 32 | 64); //SWP_FRAMECHANGED = 0x0020 (32); //SWP_SHOWWINDOW = 0x0040 (64)
+        SetWindowPos(hwnd, HWND_TOP, 0, 0, Size.x, Size.y, 32 | 64); //SWP_FRAMECHANGED = 0x0020 (32); //SWP_SHOWWINDOW = 0x0040 (64)
         DwmExtendFrameIntoClientArea(hwnd, ref margins);
     }
 

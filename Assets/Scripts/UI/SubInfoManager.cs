@@ -18,12 +18,21 @@ public class SubInfoManager : MonoBehaviour
 
     private void Awake()
     {
-        DiaplaySub(false);
-        CalenderAnim["CalenderOut"].normalizedTime = 1;
-        CPIAnim["CPIOut"].normalizedTime = 1;
+        DisplaySub(false);
+        var calState = CalenderAnim["CalenderOut"];
+        calState.weight = 1;
+        calState.enabled = true;
+        calState.normalizedTime = 1;
+        var cpiState = CPIAnim["CPIOut"];
+        cpiState.weight = 1;
+        cpiState.enabled = true;
+        cpiState.normalizedTime = 1;
+
+        CalenderAnim.Sample();
+        CPIAnim.Sample();
     }
 
-    internal void DiaplaySub(bool isIn)
+    internal void DisplaySub(bool isIn)
     {
         if (isDisplay == isIn)
             return;

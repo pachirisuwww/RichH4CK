@@ -113,6 +113,6 @@ public class InfoController : MonoBehaviour
         subMgr.MonText.ChangeText(data.mon.ToString());
         subMgr.DayText.ChangeText(data.day.ToString());
 
-        subMgr.DiaplaySub(data.scene > 1);
+        subMgr.DisplaySub(data.scene > 1);
     }
 }

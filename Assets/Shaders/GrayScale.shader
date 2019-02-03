@@ -42,7 +42,7 @@ Shader "Custom/Gray"
         Lighting Off
         ZWrite Off
         ZTest [unity_GUIZTestMode]
-        Blend SrcAlpha OneMinusSrcAlpha
+        Blend One OneMinusSrcAlpha
         ColorMask [_ColorMask]
 
         Pass
