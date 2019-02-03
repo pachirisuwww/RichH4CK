@@ -4,6 +4,8 @@ using UnityEngine;
 using MyMemory;
 public class InfoController : MonoBehaviour
 {
+    public static InfoController Instance;
+
     public InfoManager mgr;
     public SubInfoManager subMgr;
     public PointPlayer pointPlayer;
@@ -14,45 +16,36 @@ public class InfoController : MonoBehaviour
 
     MemoryData data = MemoryData.New();
 
-    void Update()
+    private void Awake()
     {
-        MemoryData newData = MemoryData.New();
-        if (!MemoryTracker.GetData(out newData))
-            return;
+        Instance = this;
+    }
 
-        bool isSel = newData.scene == 1;
-        int targetNum = 0;
-
-        //玩家數量
-        if (isSel)
-            targetNum = newData.sel_player_num;
-        else
-            targetNum = newData.player_num;
-
+    internal void Receive(int targetNum, MemoryData newData)
+    {
         if (data.Comparer(newData))
         {
             DisplayNumUpdate(targetNum);
             UpdateInfo(newData);
             UpdateSubInfo(newData);
             pointPlayer.SetIndex(newData.scene > 1 ? newData.cur : -1);
+
+            ////Hack
+            //if (data.scene > 1)
+            //{
+            //    //回合
+            //    if (newData.cur == 0 && data.cur != 0)
+            //    {
+            //        if(HackManager.Instance.isRandomCPI)
+            //        {
+            //            int cpi = HackManager.Instance.GetRandomCPI();
+            //            ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
+            //        }
+            //    }
+
+            //}
         }
         data = newData;
-    }
-
-    bool CheckSelChange(MemoryData other)
-    {
-        bool changed = false;
-        changed |= data.sel_player_num != other.sel_player_num;
-
-        return changed;
-    }
-
-    bool CheckInGameChange(MemoryData other)
-    {
-        bool changed = false;
-        changed |= data.player_num != other.player_num;
-
-        return changed;
     }
 
     void DisplayNumUpdate(int target)

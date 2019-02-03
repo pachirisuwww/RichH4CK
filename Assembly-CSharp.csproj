@@ -62,16 +62,25 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Database\Database.cs" />
     <Compile Include="Assets\Scripts\Debug\ProcessDebug.cs" />
+    <Compile Include="Assets\Scripts\Debug\QueueTextLog.cs" />
     <Compile Include="Assets\Scripts\Debug\Test.cs" />
+    <Compile Include="Assets\Scripts\Hack\HackManager.cs" />
+    <Compile Include="Assets\Scripts\Net\NetAutoDestroy.cs" />
+    <Compile Include="Assets\Scripts\Net\NetMananger.cs" />
     <Compile Include="Assets\Scripts\System\GlobalValue.cs" />
     <Compile Include="Assets\Scripts\System\MemoryTracker.cs" />
     <Compile Include="Assets\Scripts\System\ProcessManager.cs" />
     <Compile Include="Assets\Scripts\System\TransparentWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\EventSystemAutoDestroy.cs" />
     <Compile Include="Assets\Scripts\UI\InfoController.cs" />
     <Compile Include="Assets\Scripts\UI\InfoManager.cs" />
+    <Compile Include="Assets\Scripts\UI\InfoReader.cs" />
+    <Compile Include="Assets\Scripts\UI\Option.cs" />
+    <Compile Include="Assets\Scripts\UI\OptionPanelSelection.cs" />
     <Compile Include="Assets\Scripts\UI\PointPlayer.cs" />
     <Compile Include="Assets\Scripts\UI\SubInfoManager.cs" />
     <Compile Include="Assets\Scripts\UI\TextAnim.cs" />
+    <Compile Include="Assets\Scripts\Utility\MathUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\NestedUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\Process\ProcessUtility.cs" />
     <None Include="Assets\Shaders\GrayScale.shader" />

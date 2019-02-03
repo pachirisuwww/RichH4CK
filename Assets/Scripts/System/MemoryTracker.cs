@@ -120,13 +120,11 @@ namespace MyMemory
         static int sub_sel_p = 0xC;
         static int sub_p = 0x68;
 
-        static internal bool GetData(out MemoryData data)
+        static internal MemoryData GetData()
         {
-            data = MemoryData.New();
+            var data = MemoryData.New();
 
-            Process p = ProcessManager.Instance.Process;
-            if (p == null)
-                return false;
+            var p = ProcessManager.Instance.Process;
 
             //Cha
             data.sel_player_num = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.sel_player_num));
@@ -149,7 +147,7 @@ namespace MyMemory
 
             data.CPI = ProcessUtility.ReadMemInt(p, GetPtr(MemTypeEnum.CPI));
             data.scene = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.scene));
-            return true;
+            return data;
         }
 
         internal static IntPtr GetPtr(MemTypeEnum type, bool mainModule = true)
