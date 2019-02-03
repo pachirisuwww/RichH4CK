@@ -38,30 +38,32 @@ public static class ProcessUtility
     [DllImport("kernel32.dll")]
     public static extern int CloseHandle(IntPtr hProcess);
     
-    public static byte ReadMemByte(Process p, IntPtr address)
+    static byte[] Read(Process p, IntPtr address, int length)
     {
         IntPtr hProc = OpenProcess(ProcessAccessFlags.VMRead, false, p.Id);
-        byte[] val = new byte[1];
+        byte[] val = new byte[length];
 
         int bytesRead = 0;
         ReadProcessMemory(hProc, address, val, val.Length, ref bytesRead);
 
         CloseHandle(hProc);
 
-        return val[0];
+        return val;
+    }
+
+    public static byte ReadMemByte(Process p, IntPtr address)
+    {
+        return Read(p, address, 1)[0];
+    }
+
+    public static short ReadMemShort(Process p, IntPtr address)
+    {
+        return BitConverter.ToInt16(Read(p, address, 2), 0);
     }
 
     public static int ReadMemInt(Process p, IntPtr address)
     {
-        IntPtr hProc = OpenProcess(ProcessAccessFlags.VMRead, false, p.Id);
-        byte[] val = new byte[4];
-
-        int bytesRead = 0;
-        ReadProcessMemory(hProc, address, val, val.Length, ref bytesRead);
-
-        CloseHandle(hProc);
-
-        return BitConverter.ToInt32(val, 0);
+        return BitConverter.ToInt32(Read(p, address, 4), 0);
     }
 
     public static void WriteMem(Process p, IntPtr address, int v)

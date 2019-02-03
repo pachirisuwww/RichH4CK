@@ -16,6 +16,7 @@ namespace MyMemory
         //In Game Cha
         internal byte player_num;
         internal byte[] p;
+        internal byte[] life;
 
         //Money
         internal int[] cash;
@@ -33,6 +34,7 @@ namespace MyMemory
         //日期
         internal byte day;
         internal byte mon;
+        internal short year;
 
         //關卡狀態
         internal byte scene;
@@ -45,6 +47,7 @@ namespace MyMemory
             data.p = new byte[4];
             data.cash = new int[4];
             data.bank = new int[4];
+            data.life = new byte[4];
 
             return data;
         }
@@ -58,6 +61,7 @@ namespace MyMemory
 
             ret &= p.SequenceEqual(obj.p);
             ret &= sel_p.SequenceEqual(obj.sel_p);
+            ret &= life.SequenceEqual(obj.life);
 
             ret &= cash.SequenceEqual(obj.cash);
             ret &= bank.SequenceEqual(obj.bank);
@@ -69,6 +73,7 @@ namespace MyMemory
 
             ret &= day == obj.day;
             ret &= mon == obj.mon;
+            ret &= year == obj.year;
 
             ret &= scene == obj.scene;
             
@@ -87,6 +92,7 @@ namespace MyMemory
             //In Game Cha
             player_num = 0x99104,
             p1 = 0x96B7B,
+            p1_life = 0x96B7D,
 
             //Money
             cash_p1 = 0x96B84,
@@ -104,9 +110,10 @@ namespace MyMemory
             //日期
             day = 0x97160,
             mon = 0x97161,
+            year = 0x97162,
 
-            //關卡狀態(not in main module)
-            scene = 0xCF9F0,
+            //關卡狀態
+            scene = 0x7E772,
         }
 
         //差值
@@ -128,6 +135,7 @@ namespace MyMemory
             {
                 data.sel_p[i] = ProcessUtility.ReadMemByte(p, IntPtr.Add(GetPtr(MemTypeEnum.sel_p1), sub_sel_p * i));
                 data.p[i] = ProcessUtility.ReadMemByte(p, IntPtr.Add(GetPtr(MemTypeEnum.p1), sub_p * i));
+                data.life[i] = ProcessUtility.ReadMemByte(p, IntPtr.Add(GetPtr(MemTypeEnum.p1_life), sub_p * i));
                 data.cash[i] = ProcessUtility.ReadMemInt(p, IntPtr.Add(GetPtr(MemTypeEnum.cash_p1), sub_p * i));
                 data.bank[i] = ProcessUtility.ReadMemInt(p, IntPtr.Add(GetPtr(MemTypeEnum.bank_p1), sub_p * i));
             }
@@ -137,15 +145,16 @@ namespace MyMemory
             data.total = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.total));
             data.day = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.day));
             data.mon = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.mon));
+            data.year = ProcessUtility.ReadMemShort(p, GetPtr(MemTypeEnum.year));
 
             data.CPI = ProcessUtility.ReadMemInt(p, GetPtr(MemTypeEnum.CPI));
-            data.scene = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.scene, false));
+            data.scene = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.scene));
             return true;
         }
 
-        internal static IntPtr GetPtr(MemTypeEnum type, bool module = true)
+        internal static IntPtr GetPtr(MemTypeEnum type, bool mainModule = true)
         {
-            if (module)
+            if (mainModule)
                 return IntPtr.Add(ProcessManager.Instance.Process.MainModule.BaseAddress, (int)type);
             else
                 return (IntPtr)type;

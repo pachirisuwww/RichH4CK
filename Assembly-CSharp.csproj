@@ -63,13 +63,18 @@
     <Compile Include="Assets\Scripts\Database\Database.cs" />
     <Compile Include="Assets\Scripts\Debug\ProcessDebug.cs" />
     <Compile Include="Assets\Scripts\Debug\Test.cs" />
+    <Compile Include="Assets\Scripts\System\GlobalValue.cs" />
     <Compile Include="Assets\Scripts\System\MemoryTracker.cs" />
     <Compile Include="Assets\Scripts\System\ProcessManager.cs" />
     <Compile Include="Assets\Scripts\System\TransparentWindow.cs" />
     <Compile Include="Assets\Scripts\UI\InfoController.cs" />
     <Compile Include="Assets\Scripts\UI\InfoManager.cs" />
+    <Compile Include="Assets\Scripts\UI\PointPlayer.cs" />
+    <Compile Include="Assets\Scripts\UI\SubInfoManager.cs" />
+    <Compile Include="Assets\Scripts\UI\TextAnim.cs" />
     <Compile Include="Assets\Scripts\Utility\NestedUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\Process\ProcessUtility.cs" />
+    <None Include="Assets\Shaders\GrayScale.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/Git/RichH4CK/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
