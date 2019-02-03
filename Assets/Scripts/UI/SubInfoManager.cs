@@ -14,6 +14,8 @@ public class SubInfoManager : MonoBehaviour
 
     public TextAnim CPIText;
 
+    bool isDisplay;
+
     private void Awake()
     {
         DiaplaySub(false);
@@ -23,7 +25,12 @@ public class SubInfoManager : MonoBehaviour
 
     internal void DiaplaySub(bool isIn)
     {
+        if (isDisplay == isIn)
+            return;
+
         CalenderAnim.CrossFade(isIn ? "CalenderIn" : "CalenderOut");
         CPIAnim.CrossFade(isIn ? "CPIIn" : "CPIOut");
+
+        isDisplay = isIn;
     }
 }

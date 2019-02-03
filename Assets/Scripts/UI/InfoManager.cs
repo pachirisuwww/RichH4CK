@@ -21,6 +21,8 @@ public class InfoManager : MonoBehaviour
 
         public TextAnim Cash;
         public TextAnim Bank;
+
+        public bool isDisplay;
     }
     internal Info[] Infos = new Info[4];
 
@@ -82,7 +84,11 @@ public class InfoManager : MonoBehaviour
 
     internal void InfoTrans(int i, bool isIn = true)
     {
+        if (Infos[i].isDisplay == isIn)
+            return;
+
         Infos[i].Anim.CrossFade(isIn ? "In" : "Out");
+        Infos[i].isDisplay = isIn;
     }
 
     internal void SetDisplayNum(int num)

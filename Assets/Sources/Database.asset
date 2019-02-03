@@ -49,3 +49,6 @@ MonoBehaviour:
   - name: "\u91D1 \u8C9D \u8C9D"
     color: {r: 0.7411765, g: 1, b: 0.94509804, a: 1}
     Icon: {fileID: 21300000, guid: 52be848fc83bb894c865bfbc7fbf1c59, type: 3}
+  CustomColor:
+  - {r: 0.14117648, g: 0.5254902, b: 0.854902, a: 1}
+  - {r: 0, g: 0.36078432, b: 0.6666667, a: 1}

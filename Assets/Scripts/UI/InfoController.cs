@@ -89,7 +89,7 @@ public class InfoController : MonoBehaviour
             info.Icon.sprite = Database.datas[id].Icon;
             bool gray = data.scene != 1;
             gray &= data.life[i] == 0;
-            gray &= data.total > 0 || data.cur >= i;
+            gray &= data.total > 0 || data.cur > i;
             info.Icon.material.SetFloat("_GrayScale", gray ? 1 : 0);
 
             if (isSel)

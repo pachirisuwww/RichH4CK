@@ -14,4 +14,5 @@ public class Database : ScriptableObject
         public Sprite Icon;
     }
     public Data[] datas;
+    public Color[] CustomColor;
 }
