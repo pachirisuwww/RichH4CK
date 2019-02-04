@@ -30,8 +30,8 @@ public class InfoReader : NetworkBehaviour
 
         if (data.Comparer(newData))
         {
-            //經過一輪
-            if (newData.total - data.total == 1)
+            //Hack
+            if (newData.cur < data.cur)
             {
                 if (HackManager.Instance.isRandomCPI)
                 {
