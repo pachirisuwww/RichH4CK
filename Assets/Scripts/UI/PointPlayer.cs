@@ -15,7 +15,7 @@ public class PointPlayer : MonoBehaviour
 
     public Vector2 invalidPos;
     public Vector2 offset;
-    public Vector2 velocity;
+    public Vector3 velocity;
 
     void Update()
     {
@@ -28,7 +28,7 @@ public class PointPlayer : MonoBehaviour
         else
         {
             canvasGroup.alpha = mgr.Infos[index].CanvasGroup.alpha;
-            rectTrans.anchoredPosition = Vector2.SmoothDamp(rectTrans.anchoredPosition, GetPos(), ref velocity, 0.1f);
+            rectTrans.anchoredPosition = Vector3.SmoothDamp(rectTrans.anchoredPosition, GetPos(), ref velocity, 0.1f);
         }
     }
 

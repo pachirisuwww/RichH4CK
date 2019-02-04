@@ -29,7 +29,7 @@ public class InfoManager : MonoBehaviour
     struct InfoTarget
     {
         public Vector2 pos;
-        public Vector2 velocity;
+        public Vector3 velocity;
     }
     InfoTarget[] infoTargets = new InfoTarget[4];
 
@@ -78,7 +78,7 @@ public class InfoManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             Vector2 target = infoTargets[i].pos;
-            Infos[i].Rect.anchoredPosition = Vector2.SmoothDamp(Infos[i].Rect.anchoredPosition, target, ref infoTargets[i].velocity, 0.1f);
+            Infos[i].Rect.anchoredPosition = Vector3.SmoothDamp(Infos[i].Rect.anchoredPosition, target, ref infoTargets[i].velocity, 0.1f);
         }
     }
 

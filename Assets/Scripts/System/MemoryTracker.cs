@@ -76,7 +76,7 @@ namespace MyMemory
             ret &= year == obj.year;
 
             ret &= scene == obj.scene;
-            
+
             return !ret;
         }
     }
@@ -131,11 +131,11 @@ namespace MyMemory
             data.player_num = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.player_num));
             for (int i = 0; i < 4; i++)
             {
-                data.sel_p[i] = ProcessUtility.ReadMemByte(p, IntPtr.Add(GetPtr(MemTypeEnum.sel_p1), sub_sel_p * i));
-                data.p[i] = ProcessUtility.ReadMemByte(p, IntPtr.Add(GetPtr(MemTypeEnum.p1), sub_p * i));
-                data.life[i] = ProcessUtility.ReadMemByte(p, IntPtr.Add(GetPtr(MemTypeEnum.p1_life), sub_p * i));
-                data.cash[i] = ProcessUtility.ReadMemInt(p, IntPtr.Add(GetPtr(MemTypeEnum.cash_p1), sub_p * i));
-                data.bank[i] = ProcessUtility.ReadMemInt(p, IntPtr.Add(GetPtr(MemTypeEnum.bank_p1), sub_p * i));
+                data.sel_p[i] = ProcessUtility.ReadMemByte(p, AddPtr(GetPtr(MemTypeEnum.sel_p1), sub_sel_p * i));
+                data.p[i] = ProcessUtility.ReadMemByte(p, AddPtr(GetPtr(MemTypeEnum.p1), sub_p * i));
+                data.life[i] = ProcessUtility.ReadMemByte(p, AddPtr(GetPtr(MemTypeEnum.p1_life), sub_p * i));
+                data.cash[i] = ProcessUtility.ReadMemInt(p, AddPtr(GetPtr(MemTypeEnum.cash_p1), sub_p * i));
+                data.bank[i] = ProcessUtility.ReadMemInt(p, AddPtr(GetPtr(MemTypeEnum.bank_p1), sub_p * i));
             }
 
             //Course
@@ -153,9 +153,14 @@ namespace MyMemory
         internal static IntPtr GetPtr(MemTypeEnum type, bool mainModule = true)
         {
             if (mainModule)
-                return IntPtr.Add(ProcessManager.Instance.Process.MainModule.BaseAddress, (int)type);
+                return AddPtr(ProcessManager.Instance.Process.MainModule.BaseAddress, (int)type);
             else
                 return (IntPtr)type;
+        }
+
+        static IntPtr AddPtr(IntPtr a, int b)
+        {
+            return new IntPtr((int)a + b);
         }
     }
 }

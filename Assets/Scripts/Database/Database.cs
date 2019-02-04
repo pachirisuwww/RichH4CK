@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEditor;
-
 public class Database : ScriptableObject
 {
     [System.Serializable]
