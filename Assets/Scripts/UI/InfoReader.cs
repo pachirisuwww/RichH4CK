@@ -34,7 +34,7 @@ public class InfoReader : NetworkBehaviour
             if (data.scene > 1)
             {
                 //回合
-                if (newData.cur == 0 && data.cur != 0)
+                if (newData.cur < data.cur)
                 {
                     if (HackManager.Instance.isRandomCPI)
                     {
