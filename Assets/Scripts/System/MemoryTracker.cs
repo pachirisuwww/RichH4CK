@@ -90,7 +90,7 @@ namespace MyMemory
             sel_p1 = 0x8A35C,
 
             //In Game Cha
-            player_num = 0x99104,
+            player_num = 0x99114,
             p1 = 0x96B7B,
             p1_life = 0x96B7D,
 

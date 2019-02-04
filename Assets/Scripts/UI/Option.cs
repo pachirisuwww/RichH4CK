@@ -15,7 +15,7 @@ public class Option : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Escape))
             Display(!isDisplay);
     }
 
