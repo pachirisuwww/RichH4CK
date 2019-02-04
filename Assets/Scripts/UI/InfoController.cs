@@ -29,21 +29,6 @@ public class InfoController : MonoBehaviour
             UpdateInfo(newData);
             UpdateSubInfo(newData);
             pointPlayer.SetIndex(newData.scene > 1 ? newData.cur : -1);
-
-            ////Hack
-            //if (data.scene > 1)
-            //{
-            //    //回合
-            //    if (newData.cur == 0 && data.cur != 0)
-            //    {
-            //        if(HackManager.Instance.isRandomCPI)
-            //        {
-            //            int cpi = HackManager.Instance.GetRandomCPI();
-            //            ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
-            //        }
-            //    }
-
-            //}
         }
         data = newData;
     }

@@ -6,12 +6,14 @@ using UnityEngine.Networking;
 
 public class InfoReader : NetworkBehaviour
 {
+    MemoryData data = MemoryData.New();
+
     void Update()
     {
         //從第一個場景開始 且是伺服器模式
         if (!isClient)
             return;
-        
+
         if (ProcessManager.Instance == null || ProcessManager.Instance.Process == null)
             return;
 
@@ -25,9 +27,28 @@ public class InfoReader : NetworkBehaviour
             targetNum = newData.sel_player_num;
         else
             targetNum = newData.player_num;
-        
-        //Send To Receiver
-        CmdRead(targetNum, newData);
+
+        if (data.Comparer(newData))
+        {
+            //Hack
+            if (data.scene > 1)
+            {
+                //回合
+                if (newData.cur == 0 && data.cur != 0)
+                {
+                    if (HackManager.Instance.isRandomCPI)
+                    {
+                        int cpi = HackManager.Instance.GetRandomCPI();
+                        ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
+                    }
+                }
+            }
+
+            //Send To Receiver
+            CmdRead(targetNum, newData);
+
+            data = newData;
+        }
     }
 
     [Command]

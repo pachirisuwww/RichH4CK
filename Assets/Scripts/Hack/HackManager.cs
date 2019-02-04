@@ -5,6 +5,7 @@ using UnityEngine;
 public class HackManager : MonoBehaviour
 {
     public static HackManager Instance;
+    public QueueTextLog Logs;
 
     public bool isRandomCPI;
 
@@ -36,6 +37,7 @@ public class HackManager : MonoBehaviour
     public void ChangeRandomCPI(bool val)
     {
         isRandomCPI = val;
+        Logs.AddLog(string.Format("Set RandomCPI: {0}", isRandomCPI));
     }
 
     public int GetRandomCPI()

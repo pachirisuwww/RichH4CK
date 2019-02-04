@@ -35,8 +35,5 @@ public class ProcessManager : MonoBehaviour
             Process = System.Diagnostics.Process.GetProcessById(Process.Id);
 
         bool isNull = Process == null;
-
-        if (!isNull && !Process.HasExited && Input.GetKeyDown(KeyCode.K))
-            Process.Kill();
     }
 }
