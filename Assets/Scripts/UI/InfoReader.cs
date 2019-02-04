@@ -31,14 +31,15 @@ public class InfoReader : NetworkBehaviour
         if (data.Comparer(newData))
         {
             //Hack
-            if (newData.cur < data.cur)
-            {
-                if (HackManager.Instance.isRandomCPI)
+            if (newData.scene > 1)
+                if (newData.cur < data.cur)
                 {
-                    int cpi = HackManager.Instance.GetRandomCPI();
-                    ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
+                    if (HackManager.Instance.isRandomCPI)
+                    {
+                        int cpi = HackManager.Instance.GetRandomCPI();
+                        ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
+                    }
                 }
-            }
 
             //Send To Receiver
             CmdRead(targetNum, newData);

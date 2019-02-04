@@ -12,26 +12,9 @@ public class Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string hostName = Dns.GetHostName(); // Retrive the Name of HOST  
-        Console.WriteLine(hostName);
-        // Get the IP  
-        string myIP = Dns.GetHostEntry(hostName).AddressList[0].ToString();
-        Debug.Log("My IP Address is :" + myIP);
-
-
-        foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+        for (int i = 0; i < 100; i++)
         {
-            if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-            {
-                foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
-                {
-                    if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                    {
-                        //do what you want with the IP here... add it to a list, just get the first and break out. Whatever.
-                        Debug.Log(ip.Address.ToString());
-                    }
-                }
-            }
+            Debug.Log(HackManager.Instance.GetRandomCPI());
         }
     }
 
