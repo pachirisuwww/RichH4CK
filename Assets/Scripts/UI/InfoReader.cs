@@ -30,17 +30,13 @@ public class InfoReader : NetworkBehaviour
 
         if (data.Comparer(newData))
         {
-            //Hack
-            if (data.scene > 1)
+            //經過一輪
+            if (newData.total - data.total == 1)
             {
-                //回合
-                if (newData.cur < data.cur)
+                if (HackManager.Instance.isRandomCPI)
                 {
-                    if (HackManager.Instance.isRandomCPI)
-                    {
-                        int cpi = HackManager.Instance.GetRandomCPI();
-                        ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
-                    }
+                    int cpi = HackManager.Instance.GetRandomCPI();
+                    ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
                 }
             }
 
