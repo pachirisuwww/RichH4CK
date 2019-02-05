@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MyMemory;
@@ -57,6 +58,7 @@ public class InfoController : MonoBehaviour
         bool isSel = data.scene == 1;
         byte[] p = isSel ? data.sel_p : data.p;
 
+        bool allDead = data.life.All((x) => x == 0);
         for (int i = 0; i < displayNum; i++)
         {
             var info = mgr.Infos[i];
@@ -65,9 +67,8 @@ public class InfoController : MonoBehaviour
             info.ChaName.text = Database.datas[id].name;
             info.ChaName.textComponent.color = Database.datas[id].color;
             info.Icon.sprite = Database.datas[id].Icon;
-            bool gray = data.scene != 1;
+            bool gray = !allDead;
             gray &= data.life[i] == 0;
-            gray &= data.total > 0 || data.cur > i;
             info.Icon.material.SetFloat("_GrayScale", gray ? 1 : 0);
 
             if (isSel)
