@@ -77,7 +77,7 @@ public static class ProcessUtility
     public static void WriteMem(Process p, IntPtr address, byte v)
     {
         IntPtr hProc = OpenProcess(ProcessAccessFlags.All, false, p.Id);
-        byte[] val = BitConverter.GetBytes(v);
+        byte[] val = new byte[1] { v };
 
         DoWrite(hProc, address, val);
     }
@@ -85,9 +85,18 @@ public static class ProcessUtility
     static void DoWrite(IntPtr hProc, IntPtr address, byte[] val)
     {
         int bytesRead = 0;
-        WriteProcessMemory(hProc, address, val, val.Length, out bytesRead);
+        try
+        {
+            WriteProcessMemory(hProc, address, val, val.Length, out bytesRead);
 
-        CloseHandle(hProc);
+            CloseHandle(hProc);
+        }
+        catch (Exception e)
+        {
+            UnityEngine.Debug.LogError(e);
+
+            throw;
+        }
     }
     
     internal static Process GetProcess(string name)

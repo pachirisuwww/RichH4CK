@@ -8,6 +8,7 @@ public class HackManager : MonoBehaviour
     public QueueTextLog Logs;
 
     public bool isRandomCPI;
+    public bool isDecember;
 
     //public bool isMoveCPI;
     //public bool isCourseCPI;
@@ -38,6 +39,12 @@ public class HackManager : MonoBehaviour
     {
         isRandomCPI = val;
         Logs.AddLog(string.Format("Set RandomCPI: {0}", isRandomCPI));
+    }
+
+    public void ChangeDecember(bool val)
+    {
+        isDecember = val;
+        Logs.AddLog(string.Format("Set December: {0}", isDecember));
     }
 
     public int GetRandomCPI()
