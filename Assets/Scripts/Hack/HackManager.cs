@@ -10,6 +10,8 @@ public class HackManager : MonoBehaviour
     public bool isRandomCPI;
     public bool isDecember;
 
+    public bool blockChangeCPI;
+
     //public bool isMoveCPI;
     //public bool isCourseCPI;
     //public float moveCPIMul;
