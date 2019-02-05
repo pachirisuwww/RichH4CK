@@ -69,6 +69,8 @@ public class HackManager : MonoBehaviour
     {
         int add = Instance.isDecember ? 365 : 30;
         newDate = newDate.AddDays(-90 + add * (Instance.isDecreaseLoanDate ? 1 : 3));
+        if (Instance.isDecember && newDate.Month != 12)
+            newDate = new System.DateTime(newDate.Year, 12, newDate.Day);
     }
 
     //public void ChangeIsMoveCPI(bool val)
