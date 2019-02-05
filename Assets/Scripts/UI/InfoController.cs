@@ -67,7 +67,7 @@ public class InfoController : MonoBehaviour
             info.ChaName.text = Database.datas[id].name;
             info.ChaName.textComponent.color = Database.datas[id].color;
             info.Icon.sprite = Database.datas[id].Icon;
-            bool gray = !allDead;
+            bool gray = !isSel && !allDead;
             gray &= data.life[i] == 0;
             info.Icon.material.SetFloat("_GrayScale", gray ? 1 : 0);
 
@@ -92,6 +92,6 @@ public class InfoController : MonoBehaviour
         subMgr.MonText.ChangeText(data.mon.ToString());
         subMgr.DayText.ChangeText(data.day.ToString());
 
-        subMgr.DisplaySub(data.scene > 1);
+        subMgr.DisplaySub(data.scene != 1);
     }
 }
