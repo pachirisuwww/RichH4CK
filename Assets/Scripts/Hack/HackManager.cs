@@ -9,6 +9,7 @@ public class HackManager : MonoBehaviour
 
     public bool isRandomCPI;
     public bool isDecember;
+    public bool isDecreaseLoanDate;
 
     public bool blockChangeCPI;
 
@@ -49,12 +50,25 @@ public class HackManager : MonoBehaviour
         Logs.AddLog(string.Format("Set December: {0}", isDecember));
     }
 
+    public void ChangeDecreaseLoanDate(bool val)
+    {
+        isDecreaseLoanDate = val;
+        Logs.AddLog(string.Format("Set DecreaseLoanDate: {0}", isDecreaseLoanDate));
+    }
+
+
     public int GetRandomCPI()
     {
         int cpi = MathUtility.CalcWeight(RandomCPITable, (x) => x.weight, totalWeight).CPI;
         int sub = Random.Range(-cpi, cpi + 1);
         cpi = Mathf.Max(0, cpi + sub);
         return cpi;
+    }
+
+    public void GetNewLoanDate(ref System.DateTime newDate)
+    {
+        int add = Instance.isDecember ? 365 : 30;
+        newDate = newDate.AddDays(-90 + add * (Instance.isDecreaseLoanDate ? 1 : 3));
     }
 
     //public void ChangeIsMoveCPI(bool val)

@@ -21,6 +21,7 @@ namespace MyMemory
         //Money
         internal int[] cash;
         internal int[] bank;
+        internal int[] loanDate;
 
         //物價指數
         internal int CPI; //consumer price index
@@ -32,9 +33,7 @@ namespace MyMemory
         internal int total;
 
         //日期
-        internal byte day;
-        internal byte mon;
-        internal short year;
+        internal int date;
 
         //關卡狀態
         internal byte scene;
@@ -47,6 +46,7 @@ namespace MyMemory
             data.p = new byte[4];
             data.cash = new int[4];
             data.bank = new int[4];
+            data.loanDate = new int[4];
             data.life = new byte[4];
 
             return data;
@@ -65,15 +65,14 @@ namespace MyMemory
 
             ret &= cash.SequenceEqual(obj.cash);
             ret &= bank.SequenceEqual(obj.bank);
+            ret &= loanDate.SequenceEqual(obj.loanDate);
 
             ret &= cur == obj.cur;
             ret &= total == obj.total;
 
             ret &= CPI == obj.CPI;
 
-            ret &= day == obj.day;
-            ret &= mon == obj.mon;
-            ret &= year == obj.year;
+            ret &= date == obj.date;
 
             ret &= scene == obj.scene;
 
@@ -107,18 +106,19 @@ namespace MyMemory
             //總回合數
             total = 0x96738,
 
-            //日期
-            day = 0x97160,
-            mon = 0x97161,
-            year = 0x97162,
+            //日期 (day/mon/year)
+            date = 0x97160,
+
+            //貸款日
+            p1_loanDay = 0x96B94,
 
             //關卡狀態
             scene = 0x7E772,
         }
 
         //差值
-        static int sub_sel_p = 0xC;
-        static int sub_p = 0x68;
+        static internal int sub_sel_p = 0xC;
+        static internal int sub_p = 0x68;
 
         static internal MemoryData GetData()
         {
@@ -136,14 +136,13 @@ namespace MyMemory
                 data.life[i] = ProcessUtility.ReadMemByte(p, AddPtr(GetPtr(MemTypeEnum.p1_life), sub_p * i));
                 data.cash[i] = ProcessUtility.ReadMemInt(p, AddPtr(GetPtr(MemTypeEnum.cash_p1), sub_p * i));
                 data.bank[i] = ProcessUtility.ReadMemInt(p, AddPtr(GetPtr(MemTypeEnum.bank_p1), sub_p * i));
+                data.loanDate[i] = ProcessUtility.ReadMemInt(p, AddPtr(GetPtr(MemTypeEnum.p1_loanDay), sub_p * i));
             }
 
             //Course
             data.cur = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.cur));
             data.total = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.total));
-            data.day = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.day));
-            data.mon = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.mon));
-            data.year = ProcessUtility.ReadMemShort(p, GetPtr(MemTypeEnum.year));
+            data.date = ProcessUtility.ReadMemInt(p, GetPtr(MemTypeEnum.date));
 
             data.CPI = ProcessUtility.ReadMemInt(p, GetPtr(MemTypeEnum.CPI));
             data.scene = ProcessUtility.ReadMemByte(p, GetPtr(MemTypeEnum.scene));
@@ -161,6 +160,28 @@ namespace MyMemory
         static IntPtr AddPtr(IntPtr a, int b)
         {
             return new IntPtr((int)a + b);
+        }
+
+        internal static DateTime GetDate(int date)
+        {
+            byte[] bytes = BitConverter.GetBytes(date);
+
+            DateTime ret = new DateTime(BitConverter.ToInt16(bytes, 2), bytes[1], bytes[0]);
+
+            return ret;
+        }
+
+        internal static int ConvertDate(DateTime date)
+        {
+            byte[] bytes = new byte[4];
+
+            bytes[0] = (byte)date.Day;
+            bytes[1] = (byte)date.Month;
+            byte[] year = BitConverter.GetBytes((short)date.Year);
+            bytes[2] = year[0];
+            bytes[3] = year[1];
+
+            return BitConverter.ToInt32(bytes, 0);
         }
     }
 }

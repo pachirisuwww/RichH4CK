@@ -88,9 +88,10 @@ public class InfoController : MonoBehaviour
     void UpdateSubInfo(MemoryData data)
     {
         subMgr.CPIText.ChangeText(data.CPI.ToString());
-        subMgr.YearText.ChangeText(data.year.ToString());
-        subMgr.MonText.ChangeText(data.mon.ToString());
-        subMgr.DayText.ChangeText(data.day.ToString());
+        var date = MemoryTracker.GetDate(data.date);
+        subMgr.YearText.ChangeText(date.Year.ToString());
+        subMgr.MonText.ChangeText(date.Month.ToString());
+        subMgr.DayText.ChangeText(date.Day.ToString());
 
         subMgr.DisplaySub(data.scene != 1);
     }

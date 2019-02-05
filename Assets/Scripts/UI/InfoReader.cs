@@ -31,8 +31,11 @@ public class InfoReader : NetworkBehaviour
         if (data.Comparer(newData))
         {
             //Hack
+
+            //修正出魔法屋物價亂跳的問題
             if (newData.scene == 7)
                 HackManager.Instance.blockChangeCPI = true;
+
             if (newData.cur < data.cur)
             {
                 if (HackManager.Instance.isRandomCPI)
@@ -44,16 +47,40 @@ public class InfoReader : NetworkBehaviour
                         {
                             int cpi = HackManager.Instance.GetRandomCPI();
                             ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
+                            newData.CPI = cpi;
                         }
                     }
             }
 
             if (HackManager.Instance.isDecember)
-                if (newData.mon != 12)
+            {
+                var date = MemoryTracker.GetDate(newData.date);
+                if (date.Month != 12)
                 {
                     byte mon = 12;
-                    ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.mon), mon);
+                    ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.date + 1), mon);
                 }
+            }
+
+            //代款修正
+            if (HackManager.Instance.isDecember || HackManager.Instance.isDecreaseLoanDate)
+            {
+                if (data.scene > 1)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (newData.loanDate[i] != data.loanDate[i] && newData.loanDate[i] != 0)
+                        {
+                            var newDate = MemoryTracker.GetDate(newData.loanDate[i]);
+                            HackManager.Instance.GetNewLoanDate(ref newDate);
+                            int convertedDate = MemoryTracker.ConvertDate(newDate);
+                            ProcessUtility.WriteMem(ProcessManager.Instance.Process,
+                                MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.p1_loanDay + i * MemoryTracker.sub_p), convertedDate);
+                            newData.loanDate[i] = convertedDate;
+                        }
+                    }
+                }
+            }
 
             //Send To Receiver
             CmdRead(targetNum, newData);
