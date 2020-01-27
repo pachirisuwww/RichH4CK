@@ -100,6 +100,9 @@ namespace MyMemory
             //物價指數
             CPI = 0x990E8, //consumer price index
 
+            //初始金額
+            initMoney = 0x9908C,
+
             //當前玩家
             cur = 0x9910C,
 
@@ -182,6 +185,12 @@ namespace MyMemory
             bytes[3] = year[1];
 
             return BitConverter.ToInt32(bytes, 0);
+        }
+
+        internal static int ReadInitMoney()
+        {
+            var p = ProcessManager.Instance.Process;
+            return ProcessUtility.ReadMemInt(p, GetPtr(MemTypeEnum.initMoney));
         }
     }
 }

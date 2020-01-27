@@ -45,9 +45,14 @@ public class InfoReader : NetworkBehaviour
                             HackManager.Instance.blockChangeCPI = false;
                         else
                         {
-                            int cpi = HackManager.Instance.GetRandomCPI();
-                            ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
+                            if (newData.total == 0)
+                                HackManager.Instance.ResetProgressiveCPI();
+
+                            HackManager.Instance.RefreshRealCPI(newData);
+                            int cpi = HackManager.Instance.CalcBalanceCPI();
                             newData.CPI = cpi;
+
+                            ProcessUtility.WriteMem(ProcessManager.Instance.Process, MemoryTracker.GetPtr(MemoryTracker.MemTypeEnum.CPI), cpi);
                         }
                     }
             }
